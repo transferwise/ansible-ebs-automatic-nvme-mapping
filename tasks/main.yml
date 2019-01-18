@@ -31,6 +31,7 @@
     - name: Ensure script runs once
       command: /usr/local/bin/ebs-nvme-mapping
       changed_when: False
+      when: nvme_mapping_run|bool
 
   when: not(nvme_exist.stdout | regex_search('No NVMe devices detected.'))
 
