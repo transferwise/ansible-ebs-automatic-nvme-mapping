@@ -1,0 +1,28 @@
+---
+
+- name: install nvme tools
+  package:
+    name: nvme-cli
+    state: present
+
+- name: Install ebs mapper script
+  copy:
+    src: "files/ebs-nvme-mapping.sh"
+    dest: "/usr/local/bin/ebs-nvme-mapping"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install udev rules
+  copy:
+    src: "files/999-aws-ebs-nvme.rules"
+    dest: "/etc/udev/rules.d/999-aws-ebs-nvme.rules"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure script runs once
+  command: /usr/local/bin/ebs-nvme-mapping
+  changed_when: False
+
+...
