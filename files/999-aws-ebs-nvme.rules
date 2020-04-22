@@ -1,1 +1,2 @@
-ACTION=="add", SUBSYSTEM=="block", KERNEL=="nvme[1-26]n1", ATTRS{model}=="Amazon Elastic Block Store              ", RUN+="/usr/local/bin/ebs-nvme-mapping"
+SUBSYSTEM=="block", KERNEL=="nvme[0-9]*n[0-9]*", ATTRS{model}=="Amazon Elastic Block Store", PROGRAM+="/usr/local/bin/ebs-nvme-mapping /dev/%k" SYMLINK+="%c"
+KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", ATTRS{model}=="Amazon EC2 NVMe Instance Storage", PROGRAM="/usr/local/bin/nextephemeraldevice %k", SYMLINK+="%c"
