@@ -13,13 +13,16 @@
 
 - name: Install files
   block:
-    - name: Install ebs mapper script
+    - name: Install ebs and ephemeral mapper scripts
       copy:
-        src: "{{ role_path }}/files/ebs-nvme-mapping.sh"
-        dest: "/usr/local/bin/ebs-nvme-mapping"
+        src: "{{ role_path }}/files/{{ item }}.sh"
+        dest: "/usr/local/bin/{{ item }}"
         owner: root
         group: root
         mode: 0755
+      loop:
+        - ebs-nvme-mapping
+        - nextephemeraldevice
 
     - name: Install udev rules
       copy:
