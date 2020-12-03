@@ -1,7 +1,7 @@
 ---
 
 - name: check if nvme module loaded
-  lineinfile: 
+  lineinfile:
     dest: /proc/modules
     regex: '^nvme*'
     state: absent
@@ -10,7 +10,6 @@
 
 - name: proceed if nvme module is present
   import_tasks: 'configure_mapping.yml'
-  when:
-  - presence.changed
+  when: presence.changed or force_run | bool
 
 ...

@@ -1,0 +1,3 @@
+---
+# Force run (when ansible is used as a packer privisioner)
+force_run: false
