@@ -1,0 +1,2 @@
+# Run ebs-nvme-mapping.sh by ansible
+nvme_mapping_run: true
